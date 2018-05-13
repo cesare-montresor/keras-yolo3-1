@@ -1,9 +1,11 @@
 import xml.etree.ElementTree as ET
 from os import getcwd
 
-sets=[('2007', 'train'), ('2007', 'val'), ('2007', 'test')]
+path = './annots'
 
-classes = ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
+sets=[('2007', 'train'), ('2007', 'val'), ('2007', 'test'),('CVPR15','train'),('CVPR15','val'),('CVPR15','test')]
+
+classes = ["aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor", "drone"]
 
 
 def convert_annotation(year, image_id, list_file):
@@ -22,13 +24,14 @@ def convert_annotation(year, image_id, list_file):
         list_file.write(" " + ",".join([str(a) for a in b]) + ',' + str(cls_id))
 
 wd = getcwd()
-
+#print(wd)
 for year, image_set in sets:
-    image_ids = open('VOCdevkit/VOC%s/ImageSets/Main/%s.txt'%(year, image_set)).read().strip().split()
-    list_file = open('%s_%s.txt'%(year, image_set), 'w')
+    filename = '%s/VOCdevkit/VOC%s/ImageSets/Main/%s.txt'%(wd,year, image_set)
+    print(filename)
+    image_ids = open(filename).read().strip().split()
+    list_file = open('%s/%s_%s.txt'%(path,year, image_set), 'w')
     for image_id in image_ids:
         list_file.write('%s/VOCdevkit/VOC%s/JPEGImages/%s.jpg'%(wd, year, image_id))
         convert_annotation(year, image_id, list_file)
         list_file.write('\n')
     list_file.close()
-

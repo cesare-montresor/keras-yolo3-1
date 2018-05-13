@@ -17,11 +17,11 @@ YOLO_ANCHORS = np.array(((10,13), (16,30), (33,23), (30,61),
     (62,45), (59,119), (116,90), (156,198), (373,326)))
 
 def _main():
-    annotation_path = 'train.txt'
-    data_path = 'train.npz'
+    annotation_path = 'annots/train.txt'
+    data_path = 'annots/train.npz'
     output_path = 'model_data/my_yolo.h5'
     log_dir = 'logs/000/'
-    classes_path = 'model_data/voc_classes.txt'
+    classes_path = 'model_data/cvpr15_classes.txt'
     anchors_path = 'model_data/yolo_anchors.txt'
     class_names = get_classes(classes_path)
     anchors = get_anchors(anchors_path)
