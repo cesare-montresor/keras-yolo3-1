@@ -141,7 +141,7 @@ def train(model, image_data, y_true, log_dir='logs/'):
     model.fit([image_data, *y_true],
               np.zeros(len(image_data)),
               validation_split=.1,
-              batch_size=32,
+              batch_size=16,
               epochs=30,
               callbacks=[logging, checkpoint, early_stopping])
     model.save_weights(log_dir + 'trained_weights.h5')
